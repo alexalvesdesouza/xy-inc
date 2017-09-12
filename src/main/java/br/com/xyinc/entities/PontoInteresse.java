@@ -1,4 +1,4 @@
-package com.xyinc.entities;
+package br.com.xyinc.entities;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author alex
  *
  */
-@Document(collection = "pontointersse")
+@Document(collection = "pontointeresse")
 public class PontoInteresse {
 
 	@Id
