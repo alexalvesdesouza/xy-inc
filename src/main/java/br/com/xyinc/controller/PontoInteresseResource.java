@@ -23,8 +23,6 @@ import br.com.xyinc.servico.PontoInteresseServico;
 @RequestMapping(value = "/pontos-interesse")
 public class PontoInteresseResource {
 
-	// TODO terminar anotações classe
-
 	@Autowired
 	private PontoInteresseServico servico;
 

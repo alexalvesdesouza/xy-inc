@@ -39,7 +39,6 @@ public class XyIncApplicationTests {
 	public void setup() throws Exception {
 
 		this.mockMvc = webAppContextSetup(webApplicationContext).build();
-	
 
 	}
 
@@ -54,14 +53,75 @@ public class XyIncApplicationTests {
 
 	@Test
 	public void teste2validaCoordenadasNulas() throws Exception {
-		System.out.println("--> TESTE VALIDANDO PONTOS NULOS!!!");
+		System.out.println("--> TESTE 2 VALIDANDO TENTATIVA DE INSERÇÃO PONTO DE INTERESSE COM COORDENADAS NULAS!!!");
 
-		PontoInteresse poi = new PontoInteresse(null, "Iaçã Açaí", null, 10);
+		PontoInteresse poi = new PontoInteresse(null, "Iaçã Açaí", null, null);
 		poi.setErrosEncontrados(new ArrayList<String>());
 
 		mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON).content(asJsonString(poi)))
 				.andExpect(status().isConflict());
 
+		System.out.println("--> PASSOU NO TESTE!!!");
+	}
+
+	@Test
+	public void teste3validaCoordenadasNegativas() throws Exception {
+		System.out.println(
+				"--> TESTE 3 VALIDANDO TENTATIVA DE INSERÇÃO DE PONTO DE INTERESSE COM COORDENADAS NEGATIVAS!!!");
+
+		PontoInteresse poi = new PontoInteresse(null, "Iaçã Açaí", -20, -10);
+		poi.setErrosEncontrados(new ArrayList<String>());
+
+		mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON).content(asJsonString(poi)))
+				.andExpect(status().isConflict());
+
+		System.out.println("--> PASSOU NO TESTE!!!");
+	}
+
+	@Test
+	public void teste4validaNomePontoIntresseNulo() throws Exception {
+		System.out.println("--> TESTE 4 VALIDANDO TENTATIVA DE INSERÇÃO DE PONTO DE INTERESSE COM NOME NULO!!!");
+
+		PontoInteresse poi = new PontoInteresse(null, null, 10, 10);
+		poi.setErrosEncontrados(new ArrayList<String>());
+
+		mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON).content(asJsonString(poi)))
+				.andExpect(status().isConflict());
+
+		System.out.println("--> PASSOU NO TESTE!!!");
+	}
+
+	@Test
+	public void teste5validaTodosOsAtributosNulos() throws Exception {
+		System.out.println(
+				"--> TESTE 5 VALIDANDO TENTATIVA DE INSERÇÃO DE PONTO DE INTERESSE COM TODOS OS ATRIBUTOS NULOS!!!");
+
+		PontoInteresse poi = new PontoInteresse(null, null, null, null);
+		poi.setErrosEncontrados(new ArrayList<String>());
+
+		mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON).content(asJsonString(poi)))
+				.andExpect(status().isConflict());
+
+		System.out.println("--> PASSOU NO TESTE!!!");
+	}
+
+	@Test
+	public void teste6ValidandoInsercaoCorretaDePontosInteresse() throws Exception {
+		System.out.println("--> TESTE 6 VALIDANDO INSERÇÃO CORRETA DE PONTOS DE INTERESSE!!!");
+
+		PontoInteresse poi = new PontoInteresse(null, "Iaçã Açaí", 20, 10);
+		poi.setErrosEncontrados(new ArrayList<String>());
+
+		mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON).content(asJsonString(poi)))
+				.andExpect(status().isCreated());
+
+		System.out.println("--> PASSOU NO TESTE!!!");
+	}
+
+	@Test
+	public void teste7ValidandoBuscaDePontosDeInteresse() throws Exception {
+		System.out.println("--> TESTE 7 VALIDANDO SERVIÇO DE BUSCA DE PONTOS DE INTERESSE!!!");
+		mockMvc.perform(get(URL)).andExpect(status().isOk());
 		System.out.println("--> PASSOU NO TESTE!!!");
 	}
 
@@ -72,37 +132,5 @@ public class XyIncApplicationTests {
 			throw new RuntimeException(e);
 		}
 	}
-
-	
-	//
-	// @Test
-	// public void validaCoordenadasNulas() {
-	// // TODO Ajustar nome do teste e ordem de execução
-	// }
-	//
-	// @Test
-	// public void validaCoordenadasNegativas() {
-	// // TODO Ajustar nome do teste e ordem de execução
-	// }
-	//
-	// @Test
-	// public void validaNomePontoInteresseNulo() {
-	// // TODO Ajustar nome do teste e ordem de execução
-	// }
-	//
-	// @Test
-	// public void inserindoPontosInteresse() {
-	// // TODO Ajustar nome do teste e ordem de execução
-	// }
-	//
-	// @Test
-	// public void localizandoTodosPontosInteresse() {
-	// // TODO Ajustar nome do teste e ordem de execução
-	// }
-	//
-	// @Test
-	// public void localizandoPontosInteressePorCoordenadasEDistancia() {
-	// // TODO Ajustar nome do teste e ordem de execução
-	// }
 
 }
