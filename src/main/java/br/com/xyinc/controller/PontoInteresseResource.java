@@ -44,7 +44,8 @@ public class PontoInteresseResource {
 			Errors errors) {
 
 		PontoInteresse poi = servico.registrarPontoInteresse(pontoInteresse, errors);
-		HttpStatus status = null == poi ? HttpStatus.CONFLICT : HttpStatus.CREATED;
+		HttpStatus status = (null == poi || !poi.getErrosEncontrados().isEmpty()) ? HttpStatus.CONFLICT
+				: HttpStatus.CREATED;
 
 		return new ResponseEntity<PontoInteresse>(poi, status);
 	}

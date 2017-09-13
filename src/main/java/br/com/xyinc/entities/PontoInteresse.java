@@ -1,10 +1,14 @@
 package br.com.xyinc.entities;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -24,11 +28,15 @@ public class PontoInteresse {
 	@Min(value = 0, message = "Valor da Coordenada X deve ser positivo.")
 	private Integer coordenadaX;
 	@NotNull(message = "Campo obrigatório! (Coordenada Y não pode ser vazia)")
-	@Min(value = 0, message = "Valor da Coordenada Y deve positivo")
+	@Min(value = 0, message = "Valor da Coordenada Y deve ser positivo")
 	private Integer coordenadaY;
+
+	@Transient
+	private List<String> errosEncontrados = null;
 
 	public PontoInteresse() {
 		super();
+		errosEncontrados = new LinkedList<>();
 	}
 
 	public PontoInteresse(String id, String nome, Integer coordenadaX, Integer coordenadaY) {
@@ -71,10 +79,23 @@ public class PontoInteresse {
 		this.coordenadaY = coordenadaY;
 	}
 
+	public List<String> adicionaErroEncontrado(String erro) {
+		this.errosEncontrados.add(erro);
+		return this.errosEncontrados;
+	}
+
+	public List<String> getErrosEncontrados() {
+		return errosEncontrados;
+	}
+
+	public void setErrosEncontrados(List<String> errosEncontrados) {
+		this.errosEncontrados = errosEncontrados;
+	}
+
 	@Override
 	public String toString() {
 		return "PontoInteresse [id=" + id + ", nome=" + nome + ", coordenadaX=" + coordenadaX + ", coordenadaY="
-				+ coordenadaY + "]";
+				+ coordenadaY + ", errosEncontrados=" + errosEncontrados + "]";
 	}
 
 }

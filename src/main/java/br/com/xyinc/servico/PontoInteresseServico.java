@@ -1,5 +1,7 @@
 package br.com.xyinc.servico;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,11 +28,18 @@ public class PontoInteresseServico {
 	 */
 	public PontoInteresse registrarPontoInteresse(PontoInteresse entity, Errors erros) {
 
+		List<String> errosEncontrados = new ArrayList<>();
+
 		if (null == entity) {
 			return null;
 		}
 		if (erros.hasErrors()) {
-			return null;
+			erros.getFieldErrors().iterator().forEachRemaining(item -> {
+				entity.adicionaErroEncontrado(item.getDefaultMessage());
+				errosEncontrados.add(item.getDefaultMessage());
+
+			});
+			return entity;
 		}
 		return repositorio.save(entity);
 	}
@@ -59,17 +68,54 @@ public class PontoInteresseServico {
 		List<PontoInteresse> pontosProximos = new ArrayList<>();
 
 		this.listaTodosPontosInteresse().iterator().forEachRemaining(poi -> {
-			if (this.calculaDistanciaPontosMaisProximos(coordenadaX, coordenadaY, distancia, poi)) {
+			if (this.isPontoInteresseEProximo(coordenadaX, coordenadaY, distancia, poi)) {
 				pontosProximos.add(poi);
 			}
 		});
 		return pontosProximos;
 	}
 
-	private Boolean calculaDistanciaPontosMaisProximos(Integer coordenadaX, Integer coordenadaY, Double distancia,
+	private Boolean isPontoInteresseEProximo(Integer pontoReferenciaX, Integer pontoReferenciaY, Double distancia,
 			PontoInteresse poi) {
-		// TODO terminar a lógica
-		return false;
+
+		Double resultadoLatitudesX = calculaDistanciaLatitudesLongitudes(poi.getCoordenadaX().doubleValue(),
+				pontoReferenciaX.doubleValue());
+		Double resultadoLongitudeY = calculaDistanciaLatitudesLongitudes(poi.getCoordenadaY().doubleValue(),
+				pontoReferenciaY.doubleValue());
+
+		BigDecimal perimetro = new BigDecimal(distancia).setScale(10);
+
+		return new BigDecimal(determinaPontosProximosPlanoCartesiano(resultadoLatitudesX, resultadoLongitudeY))
+				.setScale(10, RoundingMode.HALF_EVEN).compareTo(perimetro) <= BigDecimal.ZERO.intValue();
+
 	}
+
+	private Double calculaDistanciaLatitudesLongitudes(Double valor1, Double valor2) {
+		return Math.pow((valor1 - valor2), 2);
+	}
+
+	private Double determinaPontosProximosPlanoCartesiano(Double latitudes, Double longitudes) {
+		return Math.sqrt((latitudes + longitudes));
+	}
+
+	// private Boolean calculaDistanciaPontosMaisProximos(Integer
+	// pontoReferenciaX, Integer pontoReferenciaY,
+	// Double distancia, PontoInteresse poi) {
+	//
+	// Double resultadoLatitudesX = Math.pow((poi.getCoordenadaX().doubleValue()
+	// - pontoReferenciaX.doubleValue()), 2);
+	// Double resultadoLongitudeY = Math.pow((poi.getCoordenadaY().doubleValue()
+	// - pontoReferenciaY.doubleValue()), 2);
+	// Double resultadoDiferenca = Math.sqrt((resultadoLatitudesX +
+	// resultadoLongitudeY));
+	//
+	// BigDecimal perimetro = new BigDecimal(distancia).setScale(10);
+	// BigDecimal resultDiferenca = new
+	// BigDecimal(resultadoDiferenca).setScale(10, RoundingMode.HALF_EVEN);
+	//
+	// return resultDiferenca.compareTo(perimetro) <=
+	// BigDecimal.ZERO.intValue();
+	//
+	// }
 
 }
