@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.xyinc.business.NotFoundException;
 import br.com.xyinc.entities.PontoInteresse;
 import br.com.xyinc.servico.PontoInteresseServico;
 
@@ -29,6 +30,9 @@ public class PontoInteresseResource {
 
 	@GetMapping
 	public @ResponseBody Collection<PontoInteresse> requestTodosPontosInteresse() {
+		if (servico.listaTodosPontosInteresse().isEmpty()) {
+			throw new NotFoundException();
+		}
 		return servico.listaTodosPontosInteresse();
 	}
 
