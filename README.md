@@ -11,7 +11,7 @@
 
 > Obs: Tanto o banco de dados MongoDB(Embedded) quanto o servidor (Apache Tomcat) são embarcados e rodam no mesmo ciclo de vida da aplicação.
 
-O MongoDB está pré configurado para rodar na porta: 27017, mas caso queira mudar as configurações iniciais, basta alterar o application.properties com um modelo parecido com o exemplo que segue abaixo.
+O MongoDB está pré configurado para rodar na porta: 27017, mas caso queira mudar as configurações iniciais, para rodar em ambiente externo ao Embedded, basta alterar o application.properties com um modelo parecido com o exemplo que segue abaixo.
 
 ```
 spring.data.mongodb.host=mongoserver
