@@ -23,32 +23,40 @@ import br.com.xyinc.servico.PontoInteresseServico;
 @RequestMapping(value = "/pontos-interesse")
 public class PontoInteresseResource {
 
-	@Autowired
-	private PontoInteresseServico servico;
+  @Autowired
+  private PontoInteresseServico servico;
 
-	@GetMapping
-	public @ResponseBody Collection<PontoInteresse> requestTodosPontosInteresse() {
-		if (servico.listaTodosPontosInteresse().isEmpty()) {
-			throw new NotFoundException();
-		}
-		return servico.listaTodosPontosInteresse();
-	}
+  @GetMapping
+  public @ResponseBody Collection<PontoInteresse> requestTodosPontosInteresse() {
 
-	@GetMapping(value = "/proximos")
-	public @ResponseBody Collection<PontoInteresse> requestTodosPontosInteresseProximos(
-			@RequestParam("coordenadaX") Integer coordenadaX, @RequestParam("coordenadaY") Integer coordenadaY,
-			@RequestParam("distancia") Double distancia) {
-		return servico.listaPontosInteresseProximos(coordenadaX, coordenadaY, distancia);
-	}
+    Collection<PontoInteresse> pontosInteresse = servico.listaTodosPontosInteresse();
 
-	@PostMapping
-	public ResponseEntity<PontoInteresse> savePointOfInteresf(@Validated @RequestBody PontoInteresse pontoInteresse,
-			Errors errors) {
+    if (pontosInteresse.isEmpty())
+      throw new NotFoundException();
 
-		PontoInteresse poi = servico.registrarPontoInteresse(pontoInteresse, errors);
-		HttpStatus status = (null == poi || !poi.getErrosEncontrados().isEmpty()) ? HttpStatus.CONFLICT
-				: HttpStatus.CREATED;
+    return pontosInteresse;
+  }
 
-		return new ResponseEntity<PontoInteresse>(poi, status);
-	}
+  @GetMapping(value = "/proximos")
+  public @ResponseBody Collection<PontoInteresse> requestTodosPontosInteresseProximos(@RequestParam("coordenadaX") Integer coordenadaX,
+                                                                                      @RequestParam("coordenadaY") Integer coordenadaY,
+                                                                                      @RequestParam("distancia") Double distancia) {
+
+    Collection<PontoInteresse> pontosInteresse = servico.listaPontosInteresseProximos(coordenadaX, coordenadaY, distancia);
+    if (pontosInteresse.isEmpty())
+      throw new NotFoundException();
+
+    return pontosInteresse;
+  }
+
+  @PostMapping
+  public ResponseEntity<PontoInteresse> savePointOfInteresf(@Validated @RequestBody PontoInteresse pontoInteresse, Errors errors) {
+
+    PontoInteresse poi = servico.registrarPontoInteresse(pontoInteresse, errors);
+    HttpStatus status = (null == poi || !poi.getErrosEncontrados()
+                                            .isEmpty()) ? HttpStatus.CONFLICT : HttpStatus.CREATED;
+
+    return new ResponseEntity<PontoInteresse>(poi,
+                                              status);
+  }
 }
