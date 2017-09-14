@@ -8,16 +8,20 @@
 
 > Obs: Tanto o banco de dados MongoDB(Embedded) quanto o servidor (Apache Tomcat) são embarcados e rodam no mesmo ciclo de vida da aplicação.
 
-O MongoDB está pré configurado para rodar na porta: 27017, mas caso queira mudar as configurações iniciais, basta alterar o application.properties com um modelo parecido com o segue abaixo.
+O MongoDB está pré configurado para rodar na porta: 27017, mas caso queira mudar as configurações iniciais, basta alterar o application.properties com um modelo parecido com o exemplo que segue abaixo.
 
 ```
 spring.data.mongodb.host=mongoserver
 spring.data.mongodb.port=27017
 ```
 
-> O Tomcat está configurado para rodar na porta: 8080
+## O Tomcat está configurado para rodar na porta: 8080
 
-## Executando a aplicação
+### Executando os testes automatizados
+> Na raiz do projeto execute: mvn clean test
+##### O resultado esperado é a execução de 09 casos de testes com sucesso.
+
+### Executando a aplicação
 - Na raiz da aplicação execute o comando: mvn clean package 
 - Na raiz da aplicação execute o comando: java -jar target/xy-inc-0.0.1-SNAPSHOT.jar
 
@@ -70,10 +74,11 @@ POST - Cadastra novo ponto de interesse através de Payload json, conforme exemp
   }
 ]
 ```
+#### Exemplo de POST
+
+
 GET - Lista todos os pontos de interesse mais próximos de acordo com as coordenadas e a dinstância passada
 - http://localhost:8080/pontos-interesse/proximos?coordenadaX=20&coordenadaY=10&distancia=10
+> Edite a URL na medida quer for preciso alterando apenas os parâmetros que seguem: coordenadaX=?, coordenadaY=?, distancia=?
 
-## Executando os testes automatizados
-> Na raiz do projeto execute: mvn clean test
-##### O resultado esperado é a execução de 09 casos de testes com sucesso.
 
