@@ -34,8 +34,7 @@ spring.data.mongodb.port=27017
 ### Executando a aplicação
 - Temos 03 formas de exeutarmos a aplicação
 ```
-1 - Na raiz do projeto execute o comando: mvn clean package 
-  1.1 - Na raiz do projeto execute o comando: java -jar target/xy-inc-0.0.1-SNAPSHOT.jar
+1 - Na raiz do projeto execute o comando: mvn clean package && java -jar target/xy-inc-0.0.1-SNAPSHOT.jar
 
 2 - Na raiz do projeto execute o comando: mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=8081' , alterando a porta caso precise.
 
