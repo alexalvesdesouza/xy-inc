@@ -74,8 +74,9 @@ POST - Cadastra novo ponto de interesse através de Payload json, conforme exemp
   }
 ]
 ```
-#### Exemplo de POST com sucesso
-![exemplogetsucesso](https://user-images.githubusercontent.com/6243119/30441612-503fc334-9950-11e7-97a4-935bf6917239.jpg)
+#### Exemplo de POST inserir
+![exemplopostinserrir](https://user-images.githubusercontent.com/6243119/30442341-8a3c0d84-9952-11e7-8bbe-e8ee47e59fdb.jpg)
+
 
 GET - Lista todos os pontos de interesse mais próximos de acordo com as coordenadas e a dinstância passada
 - http://localhost:8080/pontos-interesse/proximos?coordenadaX=20&coordenadaY=10&distancia=10
