@@ -145,7 +145,7 @@ public class XyIncApplicationTests {
 
   @Test
   public void teste8ValidandoBuscaDePontosDeInteresseProximo() throws Exception {
-    System.out.println("--> TESTE 8 VALIDANDO SERVIÇO DE BUSCA DE PONTOS DE INTERESSE PRÓXIMOS - SUCESSO!!!");
+    System.out.println("--> TESTE 8 VALIDANDO SERVIÇO DE BUSCA DE PONTOS DE INTERESSE PRÓXIMOS - CENÁRIO SUCESSO!!!");
     mockMvc.perform(get(URL + "/proximos?coordenadaX=20&coordenadaY=10&distancia=10"))
            .andExpect(status().isOk());
     System.out.println("--> PASSOU NO TESTE!!!");
@@ -153,7 +153,7 @@ public class XyIncApplicationTests {
 
   @Test
   public void teste9ValidandoBuscaDePontosDeInteresseProximo() throws Exception {
-    System.out.println("--> TESTE 9 VALIDANDO SERVIÇO DE BUSCA DE PONTOS DE INTERESSE PRÓXIMOS - FALHA!!!");
+    System.out.println("--> TESTE 9 VALIDANDO SERVIÇO DE BUSCA DE PONTOS DE INTERESSE PRÓXIMOS - CENÁRIO FALHA!!!");
     mockMvc.perform(get(URL + "/proximos?coordenadaX=7788&coordenadaY=8877&distancia=10"))
            .andExpect(status().isNotFound());
     System.out.println("--> PASSOU NO TESTE!!!");
