@@ -6,6 +6,7 @@
 	<groupId>br.com.xyinc</groupId>
 	<artifactId>xy-inc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<name>xy-inc</name>
 	<description>Projeto de pontos de interesse</description>
