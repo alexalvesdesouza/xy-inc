@@ -152,7 +152,7 @@ public class XyIncApplicationTests {
   }
 
   @Test
-  public void teste9ValidandoBuscaDePontosDeInteresseProximo() throws Exception {
+  public void teste9ValidandoNaoEncotrarPontosDeInteresseProximo() throws Exception {
     System.out.println("--> TESTE 9 VALIDANDO SERVIÇO DE BUSCA DE PONTOS DE INTERESSE PRÓXIMOS - CENÁRIO FALHA!!!");
     mockMvc.perform(get(URL + "/proximos?coordenadaX=7788&coordenadaY=8877&distancia=10"))
            .andExpect(status().isNotFound());
