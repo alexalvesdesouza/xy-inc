@@ -47,6 +47,9 @@ spring.data.mongodb.port=27017
 GET  - Lista todos os pontos de interesse
 - http://localhost:8080/pontos-interesse/ 
 
+#### Exception esperada no Brownser nos casos em que não encontrar nenhum registro 
+![exceptionexperada404](https://user-images.githubusercontent.com/6243119/30445441-533f8e28-995c-11e7-9eee-a53fe4b36b66.jpg)
+
 POST - Cadastra novo ponto de interesse através de Payload json, conforme exemplo abaixo. 
 - http://localhost:8080/pontos-interesse/ 
 
