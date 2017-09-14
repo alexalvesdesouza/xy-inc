@@ -84,6 +84,12 @@ GET - Lista todos os pontos de interesse mais próximos de acordo com as coorden
 #### Exemplo de GET com parâmetros com sucesso
 ![exemplogetcomparametros](https://user-images.githubusercontent.com/6243119/30442497-ff37eb62-9952-11e7-8dc8-04f5951de1e5.jpg)
 
+#### Exemplo de GET quando não encontra nenhum registro. O sistema dispara NotFound
+![exemplogetquandonaofoiencontradonenhumpontointeresse](https://user-images.githubusercontent.com/6243119/30442595-49e76ba6-9953-11e7-80f6-9f561053fe48.jpg)
+
+#### Exemplo de POST com parâmetros fora do esperado
+![exemploposterro](https://user-images.githubusercontent.com/6243119/30442605-4f81a5a4-9953-11e7-9884-5d42fb35e5af.jpg)
+
 
 
 
