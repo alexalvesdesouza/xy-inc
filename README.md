@@ -5,7 +5,8 @@
 - JDK 8
 - Maven
 - MongoDB
- ```Spring Tool Suit (Somente para importar o projeto -> File > Import > Existinn Mavem Projects)```
+- Spring Tool Suit (Somente para importar o projeto -> File > Import > Existinn Mavem Projects)
+> Obs. O Spring Toll Suit é para importar o projeto e ver a estrutura do projeto. Mas também pode ser feito pelo Eclipse.
  ---------------------------------------------------------------------------------------------------------------------------
 
 > Obs: Tanto o banco de dados MongoDB(Embedded) quanto o servidor (Apache Tomcat) são embarcados e rodam no mesmo ciclo de vida da aplicação.
