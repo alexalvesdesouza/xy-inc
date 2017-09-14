@@ -5,6 +5,8 @@
 - JDK 8
 - Maven
 - MongoDB
+ ```Spring Tool Suit (Somente para importar o projeto -> File > Import > Existinn Mavem Projects)```
+ ---------------------------------------------------------------------------------------------------------------------------
 
 > Obs: Tanto o banco de dados MongoDB(Embedded) quanto o servidor (Apache Tomcat) são embarcados e rodam no mesmo ciclo de vida da aplicação.
 
@@ -14,17 +16,32 @@ O MongoDB está pré configurado para rodar na porta: 27017, mas caso queira mud
 spring.data.mongodb.host=mongoserver
 spring.data.mongodb.port=27017
 ```
-
+ ---------------------------------------------------------------------------------------------------------------------------
 ## O Tomcat está configurado para rodar na porta: 8080
 
+ ---------------------------------------------------------------------------------------------------------------------------
 ### Executando os testes automatizados
-> Na raiz do projeto execute: mvn clean test
+- Temos 03 formas de executar os testes
+```
+1) Na raiz do projeto execute: mvn clean test
+2) Caso a porta 8080 esteja em uso por outra aplicação, rode o comando: 'mvn clean test -Dserver.port=8090' para alterar a porta caso precise.
+3) Vá no projeto e procure pelo arquivo XyIncApplicationTests.java e click com o botão direito dentro desta classe e execute : Run as > Junit Test
+
+```
 ##### O resultado esperado é a execução de 09 casos de testes com sucesso.
 
+ ---------------------------------------------------------------------------------------------------------------------------
 ### Executando a aplicação
-- Na raiz da aplicação execute o comando: mvn clean package 
-- Na raiz da aplicação execute o comando: java -jar target/xy-inc-0.0.1-SNAPSHOT.jar
+- Temos 03 formas de exeutarmos a aplicação
+```
+1 - Na raiz do projeto execute o comando: mvn clean package 
+  1.1 - Na raiz do projeto execute o comando: java -jar target/xy-inc-0.0.1-SNAPSHOT.jar
 
+2 - Na raiz do projeto execute o comando: mvn spring-boot:run -Drun.jvmArguments='-Dserver.port=8081' , alterando a porta caso precise.
+
+3 - Com o projeto importado no Spring Tool Suite - Procure pela classe java: XyIncApplication.java e click com o botão direito em Run as -> Spring boot App ou Run as -> Java Application
+```
+ ---------------------------------------------------------------------------------------------------------------------------
 ## Serviços disponíveis:
 
 GET  - Lista todos os pontos de interesse
